@@ -7,7 +7,6 @@ Complete, compliant and well tested module for implementing an OAuth2 server wit
 
 The *oauth-jwt-server* module is officially supported wrappers available for popular HTTP server framework [Express](https://npmjs.org/package/express-oauth-server) 
 
-
 ## Install
 
     $ npm install oauth-jwt-server
