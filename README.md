@@ -16,7 +16,7 @@ The *oauth-jwt-server* module is officially supported wrappers available for pop
 ```javascript
 var express = require('express')
 //Get oAuth Server Reference
-const { Server }  = require('../index');
+const { Server }  = require('oauth-jwt-server');
 
 /*The use of jwt-simple and moment is only illustrative, you can choose the method that is most considered pertinent, 
 in this case it is used to simulate the generation of the server token (identification of client requests for the rest api)*/
