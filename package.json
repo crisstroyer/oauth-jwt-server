@@ -13,7 +13,9 @@
     "nodejs"
   ],
   "author": "Cristian Garcia cgarcia@ariqmo.com",
-  "contributors": ["Cristian Garcia cgarcia@ariqmo.com"],
+  "contributors": [
+    "Cristian Garcia cgarcia@ariqmo.com"
+  ],
   "repository": {
     "type": "git",
     "url": "http://github.com/crisstroyer/oauth-jwt-server.git"
