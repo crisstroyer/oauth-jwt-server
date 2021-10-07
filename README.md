@@ -111,6 +111,69 @@ let config = {
 By default the algorithm to encode is `HS256`.
 The supported algorithms for encoding and decoding are `HS256`, `HS384`, `HS512` and `RS256`.
 
+### oAuth2 Diagram
+![Screenshot](./assets/diagram.png)
+
+## Getting started
+
+Your own rest api must store the information of the clients that will be able to connect via oAuth, 
+this point is scalable to any persistence implementation you have, the getAuthClients method of the configuration object 
+guarantees that you can assign the oAuth clients regardless of their own implementation.
+
+There are five ways to get started:
+
+1. The client application (External) requests authorization to access a user's resources in a given service.
+    Example:
+    The external application will have a mock endpoint like
+    /auth/myserver
+    This endpoint should do a redirect to https://myserver/api/v1/Authorization?Client_id=&redirect_uri=
+
+    Where
+    client_id: Client identification code given to the external site by the oauth server
+    redirect_uri: redirect uri set as callback to get authorization code
+
+    ```bash
+    curl 'https://myserver/api/v1/Authorization?Client_id=123456&redirect_uri=https://external/endpoint' -i -X GET
+    ```
+
+2. If the platform authorizes this request, the application receives an authorization grant.
+    If the authorization of point 1 is correct, the server generates a one-time authorization code (JWT Valid for 1 minute), 
+    which is sent to the previously configured redirect_uri.
+
+    Example:
+    ```bash
+    external/auth/response?code=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOnsiaWQiOiJsMm1wL2E1TkRsTXcxYjl3UXYrSWdnPT0iLCJzY2hlbWFJZCI6IjEifSwiaWF0IjoxNTUyNjI1NTIzLCJleHAiOjE1NTI2MjU1ODN9.8HDGPZ4-25WJNkEdz8P7fqW4_z2g9H8MHMFJCILP7PM1nz0sWRo8z8dCYsWKVhsQ7UTtI08ngDfbTkQSbX0qYQ
+    ```
+
+3. The external application requests an access token from the API authorization server presenting its identity and the permission previously granted.
+    Through an http server to server request, the external application performs a get to the endpoint https://myserver/api/v1/auth/token
+    Sending as part of the header the following data:
+    code: authorization code returned by the server in point 2.
+    Secret_pass: Secret key given to the external client to access the server
+    client_id: unique user id granted to the external client for access to the server. ⚡
+
+    Example:
+    ```bash
+    GET /auth/token HTTP/1.1
+    Host: https://myserver/api/v1
+    code: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJsMm1wL2E1TkRsTXcxYjl3UXZJZ2c9PSIsImlhdCI6MTYzMzEyNjg2NiwiZXhwIjoxNjM2MTUwODY2fQ.LZ0g2_F3icTMRrECp8MUcg9HRsYt_-Li1lsS1hpqr1OsxsZX2nz1R8ZaCPagSWp43pz7uIcxZvhCqfnd85MMEg
+    secret_pass: secret
+    client_id: l2mp/a5NDlMw1b9wQvIgg==
+    Content-Type: application/json
+    Content-Length: 100120
+    ```
+
+4. If the identity of the client application is correctly recognized by the service, 
+    and the authorization grant is valid, the authorization server issues an access token (jwt) 
+    to the application. With this the authorization has been completed.
+    Server response at point 3 is {access_token: “123.123.123”}
+
+5. The application requests a resource from the resource server (API) and presents the corresponding 
+    access token in the request header through the key x-access-token
+
+    This step depends on how your rest api is implemented, for this case there is the getTokenServer 
+    method of the server configuration object oAuth
+
 [npm-image]: https://img.shields.io/npm/v/oauth-jwt-server.svg
 [npm-url]: https://npmjs.org/package/oauth-jwt-server
 [downloads-image]: https://img.shields.io/npm/dm/oauth-jwt-server.svg
