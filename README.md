@@ -101,20 +101,9 @@ let config = {
 };
 ```
 
-## Features
-
-- Supports `authorization_code`, `client_credentials`, `refresh_token` and `password` grant, as well as *extension grants*
-- Can be used with *promises*, *Node-style callbacks*, *ES6 generators* and *async*/*await*
-- Fully [RFC 6749](https://tools.ietf.org/html/rfc6749.html) and [RFC 6750](https://tools.ietf.org/html/rfc6750.html) compliant.
-
-### Jwt Algorithms
-By default the algorithm to encode is `HS256`.
-The supported algorithms for encoding and decoding are `HS256`, `HS384`, `HS512` and `RS256`.
-
-### oAuth2 Diagram
-![Screenshot](http://cloudpivot.net/auth.png)
-
 ## Getting started
+
+![Screenshot](http://cloudpivot.net/auth.png)
 
 Your own rest api must store the information of the clients that will be able to connect via oAuth, 
 this point is scalable to any persistence implementation you have, the getAuthClients method of the configuration object 
@@ -173,6 +162,19 @@ There are five ways to get started:
 
     This step depends on how your rest api is implemented, for this case there is the getTokenServer 
     method of the server configuration object oAuth
+
+
+## Features
+
+- Supports `authorization_code`, `client_credentials`, `refresh_token` and `password` grant, as well as *extension grants*
+- Can be used with *promises*, *Node-style callbacks*, *ES6 generators* and *async*/*await*
+- Fully [RFC 6749](https://tools.ietf.org/html/rfc6749.html) and [RFC 6750](https://tools.ietf.org/html/rfc6750.html) compliant.
+
+### Jwt Algorithms
+
+By default the algorithm to encode is `HS256`.
+The supported algorithms for encoding and decoding are `HS256`, `HS384`, `HS512` and `RS256`.
+
 
 [npm-image]: https://img.shields.io/npm/v/oauth-jwt-server.svg
 [npm-url]: https://npmjs.org/package/oauth-jwt-server

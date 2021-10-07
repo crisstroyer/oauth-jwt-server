@@ -1,6 +1,6 @@
 {
   "name": "oauth-jwt-server",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Symple oAuth2 Server for Nodejs && Expressjs with jwt tokens",
   "main": "index.js",
   "scripts": {
