@@ -112,7 +112,7 @@ By default the algorithm to encode is `HS256`.
 The supported algorithms for encoding and decoding are `HS256`, `HS384`, `HS512` and `RS256`.
 
 ### oAuth2 Diagram
-![Screenshot](./assets/diagram.png)
+![Screenshot](http://cloudpivot.net/auth.png)
 
 ## Getting started
 
